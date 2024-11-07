@@ -2,7 +2,7 @@ import pandas as pd
 
 data = {
     'Product': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
-    'Sales': [200, 300, 400, None, 500, 600, None, 800, 900, 1000],
+    'Sales': [200, 300, 400, None, 500, 600, None, 800, 900, 100000],
     'Cost': [150, 200, None, 250, 300, 350, 400, None, 500, 600],
     'Profit': [50, 100, 150, 200, None, 250, None, 400, 450, None]
 }
@@ -29,5 +29,9 @@ outliers = df_copy[(df_copy["Sales"] <= lower_bound) | (df_copy["Sales"] >= uppe
 df_copy.loc[df_copy["Sales"] < lower_bound, "Sales"] = lower_bound
 df_copy.loc[df_copy["Sales"] > upper_bound, "Sales"] = upper_bound
 
+print(df_copy)
 
-print(outliers)
+df_copy["Sales"] = df_copy["Sales"].clip(lower=lower_bound, upper=upper_bound)
+
+
+print(df_copy)
